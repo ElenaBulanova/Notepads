@@ -1,9 +1,13 @@
-package com.klozevitz.homework.model;
+package org.klozevitz.classwork.model;
+
+//import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Notepad {private Integer id;
+public class Notepad {
+    private Integer id;
     private String brand;
     private String model;
     private  int pagesAmount;
@@ -22,13 +26,22 @@ public class Notepad {private Integer id;
     }
 
     public Notepad(ResultSet result) throws SQLException {
-        this.id = Integer.parseInt(result.getString("id"));
+        this.id = result.getInt("id");
         this.brand = result.getString("brand");
         this.model = result.getString("model");
-        this.pagesAmount = Integer.parseInt(result.getString("pagesAmount"));
+        this.pagesAmount = result.getInt("pagesAmount");
         this.cover = result.getString("cover");
         this.country = result.getString("country");
         this.type = result.getString("type");
+    }
+
+    public Notepad(HttpServletRequest request) {
+        this.brand = request.getParameter("brand");
+        this.model = request.getParameter("model");
+        this.pagesAmount = Integer.parseInt(request.getParameter("pagesAmount"));
+        this.cover = request.getParameter("cover");
+        this.country = request.getParameter("country");
+        this.type = request.getParameter("type");
     }
 
 
